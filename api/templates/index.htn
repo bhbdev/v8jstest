@@ -1,0 +1,23 @@
+<%init:
+// 
+%>
+
+<%block:page%>
+<div>
+  <h1 align="center">- V8JSTest API - </h1>
+  <hr />
+  <div class="page" style="width:800px;margin:0 auto;white-space:pre">
+
+    <a href="?seed">Seed 20 subscribers</a>
+
+    <a href="?getlists">GetLists</a>
+    <a href="?getcusts">GetCustomers</a>
+    <a href="?getcust">GetCustomer</a>
+    <a href="?subscribe">SubscribeCust</a>
+    
+
+  </div>
+</div>
+<hr>
+{page.response}
+<%end:page%>

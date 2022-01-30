@@ -1,0 +1,55 @@
+
+
+
+function HandleRequest() {
+  
+  Emit("Content-Type:text/html\n\n");    
+  Emit(`
+    <div>
+      <h1 align="center">- V8JSTest - </h1>
+      <hr />
+      <div class="page" style="width:800px;margin:0 auto;">
+
+      
+        <h3>Email Newsletter Sign-up</h3>
+        <form>
+        <fieldset>
+          <div>
+            Email: <input type="text" name="email" />
+          </div>
+          <div>
+            First Name: <input type="text" name="fname" />
+          </div>
+          <div>
+            Last Name: <input type="text" name="lname" />
+          </div>
+          <div>
+            Gender: 
+              <input type="radio" name="gender" value="M" /> Male
+              <input type="radio" name="gender" value="F" /> Female
+          </div>
+          <div>
+            Select Newsletter(s):<br>
+            ${listcbs()}
+          </div>
+          <br>
+            <input type="submit" name="subscribe" value="Subscribe Me" />
+        </fieldset>
+            
+        </form>
+    
+    
+      </div>
+    </div>
+  `)
+  
+}
+
+///////////////
+
+function listcbs() {
+  
+  let lists = GetLists();
+  return lists.map(list=>(`<input type="checkbox" name="lists[]" value="${list.listid}" title="${list.description}"> ${list.title}`)).join('<br />')
+  
+}

@@ -1,0 +1,111 @@
+Require('lib/util');
+
+
+const SeedCustomers = [
+  { email:MD5(Math.random())+'_test@website.com',fname:"Joe",lname:"User",gender:"M", lists:[1000,1004,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Bob",lname:"User",gender:"M", lists:[1003,1005,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Ken",lname:"User",gender:"M", lists:[1000,1004,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Kim",lname:"User",gender:"F", lists:[1006,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Jay",lname:"User",gender:"M", lists:[1000,1002,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Jon",lname:"User",gender:"M", lists:[1002,1004,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Abe",lname:"User",gender:"M", lists:[1003,1008,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Tim",lname:"User",gender:"M", lists:[1002,1004,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Tom",lname:"User",gender:"M", lists:[1001,1004,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Zoe",lname:"User",gender:"F", lists:[1000,1009,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Bil",lname:"User",gender:"M", lists:[1000,1002,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Jan",lname:"User",gender:"F", lists:[1000,1004] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Apr",lname:"User",gender:"F", lists:[1000,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Tin",lname:"User",gender:"F", lists:[1003,1004] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Sal",lname:"User",gender:"F", lists:[1005,1008,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Bra",lname:"User",gender:"M", lists:[1007,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Jak",lname:"User",gender:"M", lists:[1001,1004,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Sam",lname:"User",gender:"M", lists:[1000,1005,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Sea",lname:"User",gender:"M", lists:[1001,1003,1010] },
+  { email:MD5(Math.random())+'_test@website.com',fname:"Gre",lname:"User",gender:"M", lists:[1000,1004,1010] },
+]
+
+
+function HandleRequest() {
+  
+  const res = new HttpResponse();
+  
+  const page = {
+    body: GetTemplate('templates/index.htn'),
+    get render() { 
+      Request.CurPage = this; 
+      return this.body.toString() 
+    }
+  }
+  
+  
+  BeginEmitDiversion();  
+  EMIT:<pre>
+  Emit(`RequestParams:\n${JSONEncode(reqparams(),null," ")}\n`)
+    
+    if (ReqParam('seed','isany')) {
+      let seeds = [];
+      SeedCustomers.forEach(cust=>{
+        let r = SubscribeCust(cust);
+        Trace('cust: ' + JSONEncode(r.result));
+        if (!r.error) seeds.push(r.result);
+      });
+      Emit("Loaded " + SeedCustomers.length + " seeds.");
+      Emit(`${JSON.stringify(seeds,null," ")}`)
+    }
+  
+  
+    if (ReqParam('getcust','isany')) {
+      try {
+        const params = reqparams();
+        let cust = GetCustomer(params.email);
+        Emit('GetCustomer: ' + JSONEncode(cust,null," "))  
+      } 
+      catch (e) {
+        Emit(new JSException(e));
+      }
+    
+    }
+  
+    if (ReqParam('getlists','isany')) {
+      try {
+        let lists = GetLists();
+          Emit('\nGetLists:')
+          Emit(JSONEncode(lists,null," "))  
+      } 
+      catch (e) {
+        Emit(new JSException(e));
+      }
+    
+    }
+  
+    if (ReqParam('getcusts','isany')) {
+      try {
+        let custs = GetCustomers();
+          EMIT:GetCustomers:
+          Emit(JSONEncode(custs,null," "))  
+      } 
+      catch (e) {
+        Emit(new JSException(e));
+      }
+    
+    }
+  
+    if (ReqParam('subscribe','isany')) {
+      try {
+        const params = reqparams()
+        let result = SubscribeCust(params);
+        Emit('Subscribe Result: ' + JSONEncode(result,null," "))
+      
+      } catch (e) {
+        Emit(new JSException(e));
+      }
+    }
+    EMIT:</pre>
+    
+    page.response = EndEmitDiversion()
+    
+    res.response(page.render);
+  
+}
+
+

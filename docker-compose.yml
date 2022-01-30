@@ -1,0 +1,47 @@
+version: '3.7'
+services:
+  db:
+    image: postgres:12.9
+    container_name: v8jstest_db
+    restart: always
+    env_file:
+      - ./config/db/db.env
+    ports:
+      - '5438:5432'
+    volumes:
+      - pg-data:/var/lib/postgresql/data/
+      - ./config/db/arcatest.sql:/docker-entrypoint-initdb.d/arcatest.sql
+
+  api:
+   # image: v8jstest_apache
+    container_name: v8jstest_api
+    build:
+      context: .
+      dockerfile: v8-apache.Dockerfile
+    tty: true
+    command: sh -c "/usr/sbin/apachectl start && echo \"server ready at http://localhost:4100\" && /bin/bash"  # binlinks | sh
+    volumes:
+      - ./api:/v8jstest/webdocs/
+      - ./bin:/v8jstest/bin/
+    ports:
+      - 4100:80
+    depends_on:
+      - db
+      
+  web:
+    # image: v8jstest_apache
+     container_name: v8jstest_web
+     build:
+       context: .
+       dockerfile: v8-apache.Dockerfile
+     tty: true
+     command: sh -c "/usr/sbin/apachectl start && echo \"server ready at http://localhost:4200\" && /bin/bash"  # binlinks | sh
+     ports:
+       - 4200:80
+     volumes:
+       - ./web:/v8jstest/webdocs/
+       - ./bin:/v8jstest/bin/
+  
+      
+volumes:
+  pg-data:
