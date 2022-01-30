@@ -25,6 +25,15 @@ const SeedCustomers = [
 ]
 
 
+class V8JsonApi extends HttpResponse {
+  constructor(){
+    this.super()
+  }
+  
+}
+
+
+
 function HandleRequest() {
   
   const res = new HttpResponse();
@@ -44,7 +53,7 @@ function HandleRequest() {
     
     if (ReqParam('seed','isany')) {
       let seeds = [];
-      SeedCustomers.forEach(cust=>{
+      SeedCustomers.forEach((cust)=>{
         let r = SubscribeCust(cust);
         Trace('cust: ' + JSONEncode(r.result));
         if (!r.error) seeds.push(r.result);

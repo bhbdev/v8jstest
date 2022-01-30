@@ -33,7 +33,7 @@ CREATE TABLE list(
   code TEXT,
   title TEXT,
   description TEXT,
-  circulation INT DEFAULT 0,
+  -- circulation INT DEFAULT 0,
   leadcost NUMERIC(8,4)
 );
 CREATE INDEX ilist1 ON list (listid);
