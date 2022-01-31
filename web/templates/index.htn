@@ -1,15 +1,16 @@
 <%extends: docframe.htn %>
 <%init:
-// 
+// assign global values or functions to the 'this' keyword here
 
+//this.DEBUG = true;
 
 %>
 
 <%block:page%>
 
   <div class="container">
-
-    <div class="card m-2 mx-auto" style="xmax-width:42rem;">
+  
+    <div class="card m-2 mx-auto text-dark" style="xmax-width:42rem;">
       <div class="card-header">
         <h3>Email Newsletter Sign-up</h3>
       </div>
@@ -79,12 +80,16 @@
         </div>
         
         
-        
-        
       </form>
 
     </div>    
   </div>
 
-
+  {# debug #}
+  <% if (this.DEBUG) { %> 
+  <div class="p2" style="background:#000;color:lime;white-space:pre">
+    {ReqParamNames().join(',')}
+  </div>
+  <% } %>
+  
 <%end:page%>
