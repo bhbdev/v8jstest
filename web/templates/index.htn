@@ -1,0 +1,90 @@
+<%extends: docframe.htn %>
+<%init:
+// 
+
+
+%>
+
+<%block:page%>
+
+  <div class="container">
+
+    <div class="card m-2 mx-auto" style="xmax-width:42rem;">
+      <div class="card-header">
+        <h3>Email Newsletter Sign-up</h3>
+      </div>
+      <form  class="card-body row">
+      
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label class="form-label d-block mb-1">
+              <b>Select your Newsletters:</b>
+              <small class="d-block text-muted"><i>Pick as many as you like!</i></small>
+            </label>
+            <div class="list-group">
+            {GetLists().forEach((list,idx)=>Emit(`
+              <div class="list-group-item list-group-item-action d-inline-flex p-0" aria-current="true">
+                <div class="col-1 p-2 bg-light text-center">
+                  <input type="checkbox"  id="listcb-${idx}" name="lists[]" value="${list.listid}">
+                </div>
+                <label for="listcb-${idx}" class="col-11 p-2" style="font-size:.8rem">
+                  <div class="d-flex justify-content-between">
+                    <h6 class="mb-1" style="font-size:.9rem"><b>${list.title}</b></h6>
+                    {#<small>new!</small>#}
+                  </div>
+                  <p class="mb-1">${list.description}</p>
+                  <small class="text-muted">circ. ${list.circulation}</small>
+                </label>
+              </div>
+            `))}
+            </div>
+          </div>
+    
+        </div>
+      
+        <div class="col-md-6">
+          <label class="form-label d-block mb-1">
+            <b>Enter your Contact Information:</b>
+          </label>
+          <div class="mb-3">
+              <label for="email-input" class="form-label">Email</label>
+              <input type="email" id="email-input" class="form-control"  placeholder="jappleseed@test.com" />
+          </div>
+          <div class="row g-3 align-items-center mb-3">
+            <div class="col-sm-6">
+              <label for="fname-input" class="col-form-label">First Name</label>
+              <input type="text" id="fname-input" class="form-control" placeholder="Jonny" />
+            </div>
+            <div class="col-sm-6">
+              <label for="lname-input" class="col-form-label">Last Name</label>
+              <input type="text" id="lname-input" class="form-control" placeholder="Appleseed" />
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label d-block mb-1">Gender</label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="gender-input1" value="M">
+              <label class="form-check-label" for="gender-input1">Male</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" id="gender-input2" value="F">
+              <label class="form-check-label" for="gender-input2">Female</label>
+            </div>
+          </div>
+          <hr />
+          <div class="d-grid gap-2 col-6 mx-auto mb-3">
+            <button name="cmd.submit" class="btn btn-success" type="submit">Subscribe</button>
+            <small class="d-block text-muted"><i>We respect your privacy. <a href="#privacy" class="text-info">Privacy Policy</a></i></small>
+          </div>
+        </div>
+        
+        
+        
+        
+      </form>
+
+    </div>    
+  </div>
+
+
+<%end:page%>

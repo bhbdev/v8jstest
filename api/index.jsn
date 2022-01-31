@@ -14,18 +14,10 @@ function HandleRequest() {
   ]);
   
   api.respond();
+  
 }
  
-  // const res = new HttpResponse();
-  // const page = {
-  //   body: GetTemplate('templates/index.htn'),
-  //   get render() {
-  //     Request.CurPage = this;
-  //     return this.body.toString()
-  //   }
-  // }
-  //
-  // res.response(page.render);
+
   
 
 
