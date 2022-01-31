@@ -75,3 +75,5 @@ _Accepted parameters:_
  - __lists__   _list id or comma-delimted list of listids_
  - __unsubs__  _list id or comma-delimted list of listids_
  
+ 
+___/seed___  you can hit this endpoint  http://localhost:4100/seed  to load in 20 test subscribers

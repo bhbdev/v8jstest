@@ -67,7 +67,7 @@ VALUES ('automotivenews',   'Automotive News',      'The latest topics on cars a
        ('entertainment',    'Entertainment News',   'Get the latest on celebrities and gossip!', '0.20'),
        ('horoscopes',       'Astrology',            'Your daily horoscope and astrology news', '0.20'),
        ('fashiondaily',     'Fashion Daily',        'Hot trends in fashion, tips and more', '0.20'),
-       ('healthandfitness', 'Heath and Fitness',    'The latest heath topics, trends and advice columns', '0.20'),
+       ('healthandfitness', 'Health and Fitness',    'The latest heath topics, trends and advice columns', '0.20'),
        ('sports',           'Sports',               'The latest sports topics and highlights', '0.20'),
        ('food',             'Food Culture',         'Find the best restaurants, recipes and food around the world', '0.20'),
        ('offers',           'Daily Offers',         'Get the best deals of the day!', '0.20');
