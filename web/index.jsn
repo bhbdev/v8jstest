@@ -4,6 +4,14 @@ Require('lib/util');
 function HandleRequest() {
   
   const res = new HttpResponse();
+  
+  //TODO: handle subscribe form processing, redirect to thank you page
+  // Specs:  
+  // api endpoint:  http://localhost:4100/subscribe
+  //   - expects urlencoded request
+  //   - returns json encoded response
+  //
+  
   const page = {
     body: GetTemplate('index.htn'),
     get render() {
